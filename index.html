@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Luxury Brand Mash</title>
+
+  <style>
+    /* ===============================
+       ESTILO GENERAL (BLANCO Y NEGRO)
+       =============================== */
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      padding: 30px 20px;
+      border-bottom: 2px solid #000;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 20px auto;
+      line-height: 1.5;
+    }
+
+    /* ===============================
+       CONTENEDOR PRINCIPAL
+       =============================== */
+
+    .container {
+      margin-top: 40px;
+    }
+
+    .comparison {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+    }
+
+    .brand {
+      border: 2px solid #000;
+      padding: 30px;
+      width: 200px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .brand:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* ===============================
+       BOTONES
+       =============================== */
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* ===============================
+       RANKING
+       =============================== */
+
+    #ranking {
+      max-width: 400px;
+      margin: 40px auto;
+      text-align: left;
+      display: none;
+    }
+
+    ol {
+      padding-left: 20px;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      border-top: 1px solid #000;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Luxury Brand Mash</h1>
+    <p>
+      Compara marcas de vehículos de lujo en duelos A/B.
+      El ranking final refleja únicamente tus decisiones.
+    </p>
+  </header>
+
+  <div class="container">
+    <h2>¿Cuál prefieres?</h2>
+
+    <div class="comparison">
+      <div id="brandA" class="brand"></div>
+      <div id="brandB" class="brand"></div>
+    </div>
+
+    <button onclick="showRanking()">Ver ranking</button>
+
+    <div id="ranking">
+      <h2>Ranking actual</h2>
+      <ol id="rankingList"></ol>
+    </div>
+  </div>
+
+  <footer>
+    Algoritmo de recomendación basado en comparación A/B y ranking acumulado.
+  </footer>
+
+  <script>
+    /* ===============================
+       LISTA DE MARCAS (ELEMENTOS)
+       =============================== */
+
+    const brands = [
+      "Mercedes-Benz",
+      "BMW",
+      "Audi",
+      "Porsche",
+      "Lexus",
+      "Bentley",
+      "Rolls-Royce",
+      "Maserati",
+      "Lamborghini",
+      "Ferrari"
+    ];
+
+    /* ===============================
+       SCORES (RANKING ACUMULADO)
+       =============================== */
+
+    let scores = {};
+
+    brands.forEach(brand => {
+      scores[brand] = 0;
+    });
+
+    /* ===============================
+       VARIABLES DE COMPARACIÓN
+       =============================== */
+
+    let currentA = "";
+    let currentB = "";
+
+    /* ===============================
+       FUNCIÓN PRINCIPAL A/B
+       =============================== */
+
+    function pickTwoBrands() {
+      let first = brands[Math.floor(Math.random() * brands.length)];
+      let second = first;
+
+      while (second === first) {
+        second = brands[Math.floor(Math.random() * brands.length)];
+      }
+
+      currentA = first;
+      currentB = second;
+
+      document.getElementById("brandA").textContent = currentA;
+      document.getElementById("brandB").textContent = currentB;
+    }
+
+    /* ===============================
+       REGISTRAR ELECCIÓN HUMANA
+       =============================== */
+
+    function chooseBrand(brand) {
+      scores[brand]++;
+      pickTwoBrands();
+    }
+
+    document.getElementById("brandA").onclick = () => chooseBrand(currentA);
+    document.getElementById("brandB").onclick = () => chooseBrand(currentB);
+
+    /* ===============================
+       MOSTRAR RANKING
+       =============================== */
+
+    function showRanking() {
+      const rankingDiv = document.getElementById("ranking");
+      const list = document.getElementById("rankingList");
+
+      list.innerHTML = "";
+
+      const sorted = Object.entries(scores)
+        .sort((a, b) => b[1] - a[1]);
+
+      sorted.forEach(([brand, score]) => {
+        const li = document.createElement("li");
+        li.textContent = `${brand} (${score})`;
+        list.appendChild(li);
+      });
+
+      rankingDiv.style.display = "block";
+    }
+
+    /* ===============================
+       INICIO
+       =============================== */
+
+    pickTwoBrands();
+  </script>
+
+</body>
+</html>
