@@ -1,11 +1,11 @@
 /* ===============================
-   ESTILO GENERAL (BLANCO Y NEGRO)
+   ESTILO GENERAL (NEGRO Y DORADO)
    =============================== */
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #000000;  /* Fondo negro */
+  color: #FFD700; /* Texto dorado */
   margin: 0;
   padding: 0;
   text-align: center;
@@ -13,7 +13,7 @@ body {
 
 header {
   padding: 30px 20px;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #FFD700; /* Borde dorado */
 }
 
 h1 {
@@ -44,7 +44,7 @@ p {
 }
 
 .brand {
-  border: 2px solid #000;
+  border: 2px solid #FFD700; /* Borde dorado */
   padding: 30px;
   width: 200px;
   cursor: pointer;
@@ -52,8 +52,8 @@ p {
 }
 
 .brand:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: #FFD700; /* Fondo dorado al pasar el mouse */
+  color: #000000; /* Texto negro al pasar el mouse */
 }
 
 /* ===============================
@@ -63,8 +63,8 @@ p {
 button {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #000;
-  color: #fff;
+  background-color: #FFD700; /* Fondo dorado */
+  color: #000000; /* Texto negro */
   border: none;
   cursor: pointer;
   margin-top: 20px;
@@ -92,6 +92,6 @@ ol {
 footer {
   margin-top: 60px;
   padding: 20px;
-  border-top: 1px solid #000;
+  border-top: 1px solid #FFD700; /* Borde dorado */
   font-size: 0.9rem;
 }
